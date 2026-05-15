@@ -1,0 +1,31 @@
+{
+  "name": "Print3D Manager",
+  "short_name": "Print3D",
+  "description": "Gestão de impressão 3D — precificação, estoque e dashboard",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#6B4FBB",
+  "theme_color": "#6B4FBB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"]
+}
