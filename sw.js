@@ -1,11 +1,9 @@
 const CACHE = 'print3d-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon.svg',
-  '/icon-192.png',
-  '/icon-512.png'
+  '/Print3DManager/',
+  '/Print3DManager/index.html',
+  '/Print3DManager/manifest.json',
+  '/Print3DManager/icon.svg'
 ];
 
 self.addEventListener('install', e => {
