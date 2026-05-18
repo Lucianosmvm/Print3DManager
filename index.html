@@ -2070,12 +2070,13 @@ function renderDashboard() {
   const curMonth = dashMonth;
   const isCurrentMonth = dashYear === now.getFullYear() && dashMonth === now.getMonth();
 
-  // Parse product date "dd/mm/yyyy" → Date
+  // Parse product date "dd/mm/yyyy" or ISO → Date
   function parseDate(p) {
     const str = p.impresso && p.dataImpressao ? p.dataImpressao : p.data;
     if(!str) return null;
-    const [d,m,y] = str.split('/');
-    return new Date(+y, +m-1, +d);
+    if(str.includes('/')) { const [d,m,y] = str.split('/'); return new Date(+y, +m-1, +d); }
+    const iso = new Date(str);
+    return isNaN(iso) ? null : iso;
   }
 
   // Filter printed products only for financial metrics
@@ -2276,8 +2277,9 @@ function exportDashboardCSV() {
   function parseDate(p) {
     const str = p.impresso && p.dataImpressao ? p.dataImpressao : p.data;
     if(!str) return null;
-    const [d,m,y] = str.split('/');
-    return new Date(+y, +m-1, +d);
+    if(str.includes('/')) { const [d,m,y] = str.split('/'); return new Date(+y, +m-1, +d); }
+    const iso = new Date(str);
+    return isNaN(iso) ? null : iso;
   }
 
   const printed = products.filter(p => p.impresso);

@@ -178,6 +178,19 @@ function solicitacaoToRow(r) {
   ];
 }
 
+// ── Helpers ──────────────────────────────────────────────────
+function fmtDate(v) {
+  if (!v) return '';
+  const d = (v instanceof Date) ? v : new Date(v);
+  if (isNaN(d)) return String(v);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return dd + '/' + mm + '/' + yyyy;
+}
+
+function round2(v) { return Math.round((Number(v) || 0) * 100) / 100; }
+
 // ── Mappers: linha → objeto ──────────────────────────────────
 function rowToProduto(r) {
   return {
@@ -185,14 +198,14 @@ function rowToProduto(r) {
     nome: r[1],
     emoji: r[2],
     cliente: r[3],
-    data: r[4],
-    dataImpressao: r[5] || null,
+    data: fmtDate(r[4]),
+    dataImpressao: r[5] ? fmtDate(r[5]) : null,
     qtd: Number(r[6]) || 1,
-    custoTotal: Number(r[7]) || 0,
-    preco: Number(r[8]) || 0,
-    lucroLiq: Number(r[9]) || 0,
-    pesoUsado: Number(r[10]) || 0,
-    horas: Number(r[11]) || 0,
+    custoTotal: round2(r[7]),
+    preco: round2(r[8]),
+    lucroLiq: round2(r[9]),
+    pesoUsado: round2(r[10]),
+    horas: round2(r[11]),
     filamentoNome: r[13] || r[12] || '',
     impresso: r[14] === 'Sim',
     link: r[15] || null,
@@ -206,9 +219,9 @@ function rowToFilamento(r) {
     material: r[1],
     nome: r[2],
     color: r[3],
-    total: Number(r[4]) || 0,
-    restante: Number(r[5]) || 0,
-    precoKg: Number(r[6]) || 0
+    total: round2(r[4]),
+    restante: round2(r[5]),
+    precoKg: round2(r[6])
   };
 }
 
@@ -220,7 +233,7 @@ function rowToSolicitacao(r) {
     qtd: Number(r[3]) || 1,
     prioridade: r[4] || 'normal',
     status: r[5] || 'pendente',
-    dataCriacao: r[6],
+    dataCriacao: fmtDate(r[6]),
     obs: r[7] || '',
     link: r[8] || ''
   };
